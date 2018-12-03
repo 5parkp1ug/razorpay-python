@@ -22,12 +22,12 @@ class Utility(object):
         self.verify_signature(msg, razorpay_signature, secret)
 
     def verify_webhook_signature(self, body, signature, secret):
-        self.verify_signature(body, signature, secret)
+        return self.verify_signature(body, signature, secret)
 
     def verify_signature(self, body, signature, key):
         if sys.version_info[0] == 3:  # pragma: no cover
             key = bytes(key, 'utf-8')
-            body = bytes(body, 'utf-8')
+            # body = bytes(body, 'utf-8')
 
         dig = hmac.new(key=key,
                        msg=body,
@@ -43,6 +43,8 @@ class Utility(object):
         if not result:
             raise SignatureVerificationError(
                 'Razorpay Signature Verification Failed')
+        else:
+            return True
 
     # Taken from Django Source Code
     # Used in python version < 2.7.7
