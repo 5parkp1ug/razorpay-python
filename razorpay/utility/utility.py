@@ -36,7 +36,7 @@ class Utility(object):
                        digestmod=hashlib.sha256)
 
         generated_signature = dig.hexdigest()
-        logger.info('Signature Generated - ', generated_signature)
+        print('Signature Generated - ', generated_signature)
         if sys.version_info[0:3] < (2, 7, 7):
             result = self.compare_string(generated_signature, signature)
         else:
