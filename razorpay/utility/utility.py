@@ -1,9 +1,11 @@
 import hmac
 import hashlib
 import sys
-
+import logging
 
 from ..errors import SignatureVerificationError
+
+logger = logging.getLogger(__name__)
 
 
 class Utility(object):
@@ -34,7 +36,7 @@ class Utility(object):
                        digestmod=hashlib.sha256)
 
         generated_signature = dig.hexdigest()
-
+        logger.info('Signature Generated - ', generated_signature)
         if sys.version_info[0:3] < (2, 7, 7):
             result = self.compare_string(generated_signature, signature)
         else:
