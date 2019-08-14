@@ -29,7 +29,7 @@ class Utility(object):
     def verify_signature(self, body, signature, key):
         if sys.version_info[0] == 3:  # pragma: no cover
             key = bytes(key, 'utf-8')
-            # body = bytes(body, 'utf-8')
+            body = bytes(body, 'utf-8')
 
         dig = hmac.new(key=key,
                        msg=body,
