@@ -133,27 +133,120 @@ that both app title and version are strings.
     client.order.payments("<ORDER_ID>")
     ```
 
-### Invoices
 
-- Create a new invoice
+### Payment Link
 
+- Create payment link
+
+    Refer [api docs](https://razorpay.com/docs/payment-links/api/#creating-payment-links) for allowed request parameters.
     ```py
+    DATA = {
+        "customer": {
+            "name": "Test Customer",
+            "email": "test@example.com",
+            "contact": "+919999888877"
+        },
+        "type": "link",
+        "amount": 100,
+        "currency": "INR",
+        "description": "Payment link for this purpose - xyz"
+    }
     client.invoice.create(data=DATA)
     ```
-    For List of params refer to this :-
-    https://docs.razorpay.com/v1/page/invoices#v1invoices
 
-
-- fetch a particular invoice
+- Fetch payment link's details by id
 
     ```py
     client.invoice.fetch("<INVOICE_ID>")
     ```
 
-- fetch all invoices
+- Fetch all payment link
 
+    Refer [api docs](https://razorpay.com/docs/payment-links/api/#fetching-get-multiple-payment-links) for allowed query parameters.
     ```py
     client.invoice.all()
+    ```
+
+- Cancel a payment link by id
+
+    ```py
+    client.invoice.cancel("<INVOICE_ID>")
+    ```
+
+- Send/resend notifications for a payment link by id
+
+    ```py
+    client.invoice.notify_by("<INVOICE_ID>", "<MEDIUM>")
+    # MEDIUM - sms/email
+    ```
+
+### Invoices
+
+- Create a new invoice
+
+    Refer [api docs](https://razorpay.com/docs/invoices/api/#creating-an-invoice) for allowed request parameters in detail.
+    ```py
+    client.invoice.create(data=DATA)
+    ```
+
+- Fetch a invoice by id
+
+    ```py
+    client.invoice.fetch("<INVOICE_ID>")
+    ```
+
+- Fetch all invoices
+
+    Refer [api docs](https://razorpay.com/docs/invoices/api/#fetching-multiple-invoices) for allowed query parameters.
+    ```py
+    client.invoice.all()
+    ```
+
+- Cancel an invoice by id
+
+    ```py
+    client.invoice.cancel("<INVOICE_ID>")
+    ```
+
+- Send/resend notifications for an invoice by id
+
+    ```py
+    client.invoice.notify_by("<INVOICE_ID>", "<MEDIUM>")
+    # MEDIUM - sms/email
+    ```
+
+- Issue an invoice in draft status by id
+
+    ```py
+    client.invoice.issue("<INVOICE_ID>")
+    ```
+
+- Delete an invoice by id
+
+    ```py
+    client.invoice.delete("<INVOICE_ID>")
+    ```
+
+- Edit an invoice by id
+
+    Refer [api docs](https://razorpay.com/docs/invoices/api/#updating-an-invoice) for allowed request parameters in detail.
+    ```py
+    client.invoice.edit(invoice_id=invoice_id,data=DATA)
+    ```
+
+
+### Settlements
+
+- fetch a particular settlement detail
+
+    ```py
+    client.settlement.fetch("<SETTLEMENT_ID>")
+    ```
+
+- fetch all settlement detail
+
+    ```py
+    client.settlement.all()
     ```
 
 ### Card
